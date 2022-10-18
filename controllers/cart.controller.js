@@ -33,6 +33,7 @@ module.exports.createCartItem = async (req, res) => {
 module.exports.getCartItem = async(req,res)=>{
    const cartItems = await Cart.find({userId:req.user._id})
    .populate('productId','name img')
+   .populate('userId')
   
    return res.status(200).send(cartItems);
 }

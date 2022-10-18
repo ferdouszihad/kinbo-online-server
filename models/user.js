@@ -20,6 +20,12 @@ const userSchema = Schema({
     maxLength: 1024,
     required: true,
   },
+  address1:String,
+  address2:String,
+  city:String,
+  state:String,
+  zip:String
+
 });
 
 const validateUser = function (user) {

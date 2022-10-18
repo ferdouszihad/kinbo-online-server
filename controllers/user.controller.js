@@ -64,3 +64,13 @@ module.exports.signIn = async (req, res) => {
     user,
   });
 };
+
+
+module.exports.updateUser = async(req,res)=>{
+    const _id = req.user._id;
+    console.log(_id,req.body);
+    const result = await User.updateOne({_id:_id},req.body);
+    res.status(200).send({
+      status:true
+    })
+}
