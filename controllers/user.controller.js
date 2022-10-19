@@ -23,13 +23,13 @@ module.exports.signUp = async (req, res) => {
   try {
     const result = await user.save();
     return res.status(200).send({
-      status:true,
-      data:result
+      status: true,
+      data: result,
     });
   } catch (error) {
     return res.status(400).send({
-      status:false,
-      message:"Registration failed"
+      status: false,
+      message: "Registration failed",
     });
   }
 };
@@ -65,12 +65,10 @@ module.exports.signIn = async (req, res) => {
   });
 };
 
-
-module.exports.updateUser = async(req,res)=>{
-    const _id = req.user._id;
-    console.log(_id,req.body);
-    const result = await User.updateOne({_id:_id},req.body);
-    res.status(200).send({
-      status:true
-    })
-}
+module.exports.updateUser = async (req, res) => {
+  const _id = req.user._id;
+  const result = await User.updateOne({ _id: _id }, req.body);
+  res.status(200).send({
+    status: true,
+  });
+};

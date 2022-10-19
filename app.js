@@ -10,14 +10,16 @@ const stripe = require("stripe")(
 const userRouter = require("./routers/userRouter.js");
 const productRouter = require("./routers/productRouter");
 const cartRouter = require("./routers/cartRouter");
-const isActive = require("./middlewares/isActive");
 const orderRouter = require("./routers/orderRouter");
+const isActive = require("./middlewares/isActive");
+
+//middleware
 app.use(morgan("tiny"));
 app.use(cors());
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//API
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
@@ -26,27 +28,20 @@ app.get("/active", isActive);
 
 // payment intent
 app.post("/create-payment-intend", async (req, res) => {
-    console.log(req.body);
-    let {amount} =  req.body;
-//   const price = parseInt(amount)*100;
-     amount = amount*100;
-     
+  let { amount } = req.body;
+  amount = amount * 100;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount,
-        currency: "usd",
-        payment_method_types: ["card"]
-      });
-    
-      res.send({
-        clientSecret: paymentIntent.client_secret,
-      });
+      amount: amount,
+      currency: "usd",
+      payment_method_types: ["card"],
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
   } catch (error) {
-     console.log(error);
+    console.log(error);
   }
-
-  
-  
 });
 
 app.post("/", (req, res) => {

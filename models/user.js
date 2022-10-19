@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+
+
 const userSchema = Schema({
   name: {
     type: String,
@@ -40,4 +42,3 @@ const validateUser = function (user) {
 module.exports.User = model("User", userSchema);
 module.exports.validateUser = validateUser;
 
-// error.details[0].message
