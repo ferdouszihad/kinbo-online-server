@@ -18,7 +18,6 @@ module.exports.createCartItem = async (req, res) => {
     userId: req.user._id,
   });
 
-  console.log(cartItem);
   try {
     const result = await cartItem.save();
     return res.status(200).send({
@@ -42,12 +41,13 @@ module.exports.getCartItem = async (req, res) => {
 };
 
 module.exports.updateCartItem = async (req, res) => {
-  const { _id, quantity } = _.pick(req.body, ["_id", "quantity"]);
-  console.log(_id, quantity);
-  const userId = req.user._id;
-
-  const result = await Cart.updateOne({ _id, userId }, { quantity });
-  res.status(200).send({
+   const userId = req.user._id;
+   const cartItem = req.body.cart;
+   const {_id }= cartItem;
+   console.log(userId,cartItem,_id);
+   const result = await Cart.updateOne({ _id, userId }, cartItem);
+   console.log(result);
+   res.status(200).send({
     status: true,
     message: "quantity updated",
   });
@@ -55,7 +55,7 @@ module.exports.updateCartItem = async (req, res) => {
 
 module.exports.deleteCartItem = async (req, res) => {
   const { id } = req.params;
-  console.log("Anas", id);
+
   await Cart.deleteOne({ _id: id, userId: req.user._id });
   res.status(200).send({
     status: true,

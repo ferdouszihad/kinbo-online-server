@@ -13,7 +13,6 @@ module.exports.createOrder = async (req, res) => {
     products: products,
   });
 
-  console.log("order", order);
   const result = await order.save();
   return res.status(200).send({
     _id: result._id,

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const chalk = require('chalk');
 dotenv.config();
+
 const app = require("./app");
 
 mongoose
@@ -10,5 +12,5 @@ mongoose
 
 const port = 8000;
 app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
+  console.log(chalk.bgRed(`server is running on port ${port}`));
 });
