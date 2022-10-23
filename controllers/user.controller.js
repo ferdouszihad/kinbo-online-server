@@ -72,3 +72,10 @@ module.exports.updateUser = async (req, res) => {
     status: true,
   });
 };
+
+
+module.exports.getUsers = async(req,res) =>{
+   const result = await User.find();
+
+   res.status(200).send(result)
+}

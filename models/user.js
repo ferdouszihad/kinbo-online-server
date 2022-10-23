@@ -22,6 +22,7 @@ const userSchema = Schema({
     maxLength: 1024,
     required: true,
   },
+  phone:String,
   address1:String,
   address2:String,
   city:String,

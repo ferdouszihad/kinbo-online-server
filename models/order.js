@@ -13,6 +13,13 @@ const orderSchema = Schema({
      price:Number,
      quantity:Number
    }],
+   paid:Boolean,
+   amount:Number,
+   transactionId:String,
+   delivery:{
+     type:String,
+     default:"pending"
+   }
 
 });
 
