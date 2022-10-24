@@ -21,7 +21,7 @@ const orderSchema = Schema({
      default:"pending"
    }
 
-});
+},{timestamps:true});
 
 
 module.exports.Order = model('Order',orderSchema);

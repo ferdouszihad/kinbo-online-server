@@ -66,3 +66,11 @@ module.exports.getOrderDetail = async(req,res) =>{
    const result = await Order.findOne({_id:id});
    res.status(200).send(result)
 }
+
+
+module.exports.getUserOrders = async(req,res) =>{
+   const _id = req.user._id;
+   const orders = await Order.find({userId:_id})
+   .sort({_id:-1});
+   res.status(200).send(orders);
+}
