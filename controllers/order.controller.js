@@ -7,11 +7,12 @@ module.exports.createOrder = async (req, res) => {
   const products = await Cart.find({ userId: _id }).select(
     "productId price quantity"
   );
-
+  
   const order = new Order({
     userId: _id,
     products: products,
   });
+  const cart = await Cart.deleteMany({userId:_id});
 
   const result = await order.save();
   return res.status(200).send({
